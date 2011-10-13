@@ -1,0 +1,59 @@
+// Golden Ratio grid setup - works with %, px, ems
+// we're just dealing with boxes here people.
+// if you want more margin, padding or borders?
+// define that in your design styles
+
+// Configurable Var
+$container-width: 100% !default;
+
+// Static Vars
+$phi: 1.6180339887;
+$extreme-width: ceil($container-width / $phi);
+$mean-width: $container-width - $extreme-width;
+$margin-width: $container-width * .01;
+
+// mixin to create a base column style without a width calculation
+@mixin column-base($last: false) {
+  @include float-left;
+  @if $last {
+    @include last; }
+  @else {
+    margin-right:$margin-width; }
+  * html & {
+    overflow-x:hidden; }}
+
+// mixin to declare last - no right margin silly
+@mixin last {
+  margin:0; }
+
+// mixin for column width generation
+@mixin column($width: false, $last: false) {
+  @include column-base($last);
+  @if $width {
+    width: $extreme-width - $margin-width; }
+  @else {
+    width: $mean-width - $margin-width; } }
+
+// mixins for extreme and mean margin push
+@mixin push-extreme {
+  @include column-base;
+  margin-left:$extreme-width;
+  // width: $mean-width + $margin-width;
+}
+//
+@mixin push-mean {
+  @include column-base;
+  margin-left:$mean-width;
+  // width: $extreme-width;
+}
+//
+// mixins for extreme and mean margin pull
+// @mixin pull-extreme {
+//   @include column-base;
+//   margin-left:-$extreme-width;
+//   width: $mean-width; }
+//
+// @mixin pull-mean {
+//   @include column-base;
+//   margin:0 (-$mean-width) 0 $mean-width;
+//   width: $extreme-width; }
