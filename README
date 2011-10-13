@@ -1,0 +1,8 @@
+Work in progress of a simple grid system created with the golden ratio principle.
+
+Eventually I will port this to Compass as an extension, as it is built using sass and compass.
+
+* relies on Compass utilities library to use float mixins for now. Please import compass/utilities to use properly.
+* will not work unless used with SASS and Compass currently
+
+Feel free to contribute or ask questions.
